@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -134,6 +133,23 @@ public class Graphs {
     listOfDepthsHelper(node.right, lists, level + 1);
   }
 
+  // 4.4 Check Balanced: Implement a function to check if a binary tree is
+  // balanced.
+  public static int checkHeight(TreeNode root) {
+    if (root == null)
+      return 0;
+    int leftH = checkHeight(root.left);
+    int rightH = checkHeight(root.right);
+    if (leftH == -1 || rightH == -1 || Math.abs(leftH - rightH) > 1) {
+      return -1;
+    }
+    return Math.max(leftH, rightH) + 1;
+  }
+
+  public static boolean isBalanced(TreeNode root) {
+    return checkHeight(root) != -1;
+  }
+
   public static void main(String[] args) {
     // Example usage of the Graph class
     Graph<Integer> graph = new Graph<>();
@@ -168,5 +184,8 @@ public class Graphs {
       }
       System.out.println();
     }
+
+    // 4.4 Check Balanced testing
+    System.out.println("Is the tree balanced? " + isBalanced(root)); // true
   }
 }
